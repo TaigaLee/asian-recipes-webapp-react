@@ -1,4 +1,4 @@
-# asian-recipes-webapp-react
+o# asian-recipes-webapp-react
 
 # User Stories
 
@@ -19,7 +19,7 @@
 
 ## Page users see after logging in
 
-![default page](https://i.imgur.com/vbXgAne.png)
+![default page](https://i.imgur.com/ArwrvC9.png)
 
 ## New recipe form
 
@@ -28,3 +28,11 @@
 ## Recipe view page
 
 ![recipe page2](https://i.imgur.com/iO9y8Rs.png)
+
+## Edit Recipe page
+
+![edit recipe](https://i.imgur.com/8UwZI6a.png)
+
+## User settings page
+
+![user settings](https://i.imgur.com/WfYIzDN.png)
