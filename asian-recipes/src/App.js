@@ -1,13 +1,17 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import RecipeContainer from "./RecipeContainer";
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Hello, world</h1>
-    </div>
-  );
+export default class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      loggedIn: false
+    };
+  }
+
+  render() {
+    return <RecipeContainer />;
+  }
 }
-
-export default App;
