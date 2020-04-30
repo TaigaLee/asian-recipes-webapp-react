@@ -28,7 +28,3 @@
 ## Recipe view page
 
 ![recipe page2](https://i.imgur.com/iO9y8Rs.png)
-
-## Recipe data table
-
-![recipes](https://i.imgur.com/s4quKd1.png)
