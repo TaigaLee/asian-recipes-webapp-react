@@ -35,14 +35,12 @@ export default class EditRecipeModal extends React.Component {
               type="text"
               name="name"
               value={this.state.name}
-              value={this.state.name}
               onChange={this.handleChange}
             />
             <Label>Origin:</Label>
             <Form.Input
               type="text"
               name="origin"
-              value={this.state.origin}
               value={this.state.origin}
               onChange={this.handleChange}
             />
@@ -51,14 +49,12 @@ export default class EditRecipeModal extends React.Component {
               type="textarea"
               name="ingredients"
               value={this.state.ingredients}
-              value={this.state.ingredients}
               onChange={this.handleChange}
             />
             <Label>Instructions:</Label>
             <Form.Input
               type="textinstructionsarea"
               name="instructions"
-              value={this.state.instructions}
               value={this.state.instructions}
               onChange={this.handleChange}
             />

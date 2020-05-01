@@ -2,6 +2,7 @@ import React from "react";
 import RecipeList from "../RecipeList";
 import NewRecipeForm from "../NewRecipeForm";
 import EditRecipeModal from "../EditRecipeModal";
+import Header from "../Header";
 
 export default class RecipeContainer extends React.Component {
   constructor(props) {
@@ -107,7 +108,7 @@ export default class RecipeContainer extends React.Component {
       if (updatedRecipeResponse.status === 200) {
         const recipes = this.state.recipes;
         const indexOfRecipeBeingUpdated = recipes.findIndex(
-          recipe => recipe.id == this.state.idOfRecipeToEdit
+          recipe => recipe.id === this.state.idOfRecipeToEdit
         );
 
         recipes[indexOfRecipeBeingUpdated] = updatedRecipeJson.data;
@@ -131,7 +132,7 @@ export default class RecipeContainer extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h1>Recipe container</h1>
+        <Header />
         <NewRecipeForm createRecipe={this.createRecipe} />
 
         <RecipeList
