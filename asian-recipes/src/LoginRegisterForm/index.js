@@ -54,7 +54,7 @@ export default class LoginRegisterForm extends React.Component {
               />
             </React.Fragment>
           )}
-          <Label>Email:</Label>
+          <Label>Username:</Label>
           <Form.Input
             type="text"
             name="username"
@@ -64,7 +64,7 @@ export default class LoginRegisterForm extends React.Component {
           />
           <Label>Password:</Label>
           <Form.Input
-            type="text"
+            type="password"
             name="password"
             placeholder="Enter a password"
             value={this.state.password}
