@@ -1,13 +1,15 @@
 import React from "react";
 import RecipeList from "../RecipeList";
 import NewRecipeForm from "../NewRecipeForm";
+import EditRecipeModal from "../EditRecipeModal";
 
 export default class RecipeContainer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      recipes: []
+      recipes: [],
+      idOfRecipeToEdit: -1
     };
   }
 
@@ -78,6 +80,54 @@ export default class RecipeContainer extends React.Component {
     }
   };
 
+  editRecipe = idOfRecipeToEdit => {
+    this.setState({
+      idOfRecipeToEdit: idOfRecipeToEdit
+    });
+  };
+
+  updateRecipe = async updatedRecipeInfo => {
+    try {
+      const url =
+        process.env.REACT_APP_API_URL +
+        "/api/v1/recipes/" +
+        this.state.idOfRecipeToEdit;
+
+      const updatedRecipeResponse = await fetch(url, {
+        credentials: "include",
+        method: "PUT",
+        body: JSON.stringify(updatedRecipeInfo),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      const updatedRecipeJson = await updatedRecipeResponse.json();
+
+      if (updatedRecipeResponse.status === 200) {
+        const recipes = this.state.recipes;
+        const indexOfRecipeBeingUpdated = recipes.findIndex(
+          recipe => recipe.id == this.state.idOfRecipeToEdit
+        );
+
+        recipes[indexOfRecipeBeingUpdated] = updatedRecipeJson.data;
+
+        this.setState({
+          recipes: recipes,
+          idOfRecipeToEdit: -1
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  closeModal = () => {
+    this.setState({
+      idOfRecipeToEdit: -1
+    });
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -87,7 +137,19 @@ export default class RecipeContainer extends React.Component {
         <RecipeList
           recipes={this.state.recipes}
           deleteRecipe={this.deleteRecipe}
+          editRecipe={this.editRecipe}
         />
+
+        {this.state.idOfRecipeToEdit !== -1 && (
+          <EditRecipeModal
+            key={this.state.idOfRecipeToEdit}
+            recipeToEdit={this.state.recipes.find(
+              recipe => recipe.id === this.state.idOfRecipeToEdit
+            )}
+            updateRecipe={this.updateRecipe}
+            closeModal={this.closeModal}
+          />
+        )}
       </React.Fragment>
     );
   }

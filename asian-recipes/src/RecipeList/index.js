@@ -17,6 +17,9 @@ export default function RecipeList(props) {
             <div>Instructions: {recipe.instructions}</div>
           </Card.Description>
         </Card.Content>
+        <Button basic color="green" onClick={() => props.editRecipe(recipe.id)}>
+          Edit {recipe.name}
+        </Button>
         <Button basic color="red" onClick={() => props.deleteRecipe(recipe.id)}>
           Delete Recipe
         </Button>
