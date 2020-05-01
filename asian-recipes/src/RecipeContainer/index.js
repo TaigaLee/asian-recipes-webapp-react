@@ -15,9 +15,8 @@ export default class RecipeContainer extends React.Component {
   }
 
   getRecipes = async () => {
+    const url = process.env.REACT_APP_API_URL + "/api/v1/recipes/";
     try {
-      const url = process.env.REACT_APP_API_URL + "/api/v1/recipes/";
-
       const recipesResponse = await fetch(url, {
         credentials: "include"
       });
@@ -32,11 +31,36 @@ export default class RecipeContainer extends React.Component {
     }
   };
 
+  deleteRecipe = async idOfRecipeToDelete => {
+    try {
+      const url =
+        process.env.REACT_APP_API_URL + "/api/v1/recipes/" + idOfRecipeToDelete;
+
+      const deleteRecipeResponse = await fetch(url, {
+        credentials: "include",
+        method: "DELETE"
+      });
+
+      if (deleteRecipeResponse.status === 200) {
+        this.setState({
+          recipes: this.state.recipes.filter(
+            recipe => recipe.id !== idOfRecipeToDelete
+          )
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   render() {
     return (
       <React.Fragment>
         <h1>Recipe container</h1>
-        <RecipeList recipes={this.state.recipes} />
+        <RecipeList
+          recipes={this.state.recipes}
+          deleteRecipe={this.deleteRecipe}
+        />
       </React.Fragment>
     );
   }

@@ -8,12 +8,18 @@ export default function RecipeList(props) {
       <Card key={recipe.id}>
         <Card.Content textAlign={"center"}>
           <Card.Header>{recipe.name}</Card.Header>
-          <Card.Meta>Origin Country: {recipe.origin}</Card.Meta>
+          <Card.Meta>
+            <div>Origin Country: {recipe.origin}</div>
+            <div>Posted by: {recipe.poster.username}</div>
+          </Card.Meta>
           <Card.Description>
             <div>Ingredients: {recipe.ingredients}</div>
             <div>Instructions: {recipe.instructions}</div>
           </Card.Description>
         </Card.Content>
+        <Button basic color="red" onClick={() => props.deleteRecipe(recipe.id)}>
+          Delete Recipe
+        </Button>
       </Card>
     );
   });

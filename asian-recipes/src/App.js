@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import RecipeContainer from "./RecipeContainer";
+import LoginRegisterForm from "./LoginRegisterForm";
 
 export default class App extends React.Component {
   constructor() {
@@ -12,6 +13,10 @@ export default class App extends React.Component {
   }
 
   render() {
-    return <RecipeContainer />;
+    return (
+      <div className="App">
+        {this.state.loggedIn ? <RecipeContainer /> : <LoginRegisterForm />}
+      </div>
+    );
   }
 }
