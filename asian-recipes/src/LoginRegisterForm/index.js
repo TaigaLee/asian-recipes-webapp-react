@@ -57,9 +57,9 @@ export default class LoginRegisterForm extends React.Component {
           <Label>Email:</Label>
           <Form.Input
             type="text"
-            name="email"
-            placeholder="Enter an email"
-            value={this.state.email}
+            name="username"
+            placeholder="Enter username"
+            value={this.state.username}
             onChange={this.handleChange}
           />
           <Label>Password:</Label>
@@ -76,17 +76,12 @@ export default class LoginRegisterForm extends React.Component {
         </Form>
         {this.state.action === "Login" ? (
           <p>
-            Need an account? Sign up{" "}
-            <span className="fake-link" onClick={this.switchForm}>
-              here
-            </span>
+            Need an account? Sign up <span onClick={this.switchForm}>here</span>
           </p>
         ) : (
           <p>
             Already have an account? Log in{" "}
-            <span className="fake-link" onClick={this.switchForm}>
-              here
-            </span>
+            <span onClick={this.switchForm}>here</span>
           </p>
         )}
       </React.Fragment>
