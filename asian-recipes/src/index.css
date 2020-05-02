@@ -1,18 +1,7 @@
-body {
-  margin: 0;
-}
-
 .fake-link {
   cursor: pointer;
   color: blue;
   text-decoration: underline;
-}
-
-.LoginRegisterForm-Header {
-  margin-bottom: 10px;
-  font-family: "Carter One", cursive;
-  color: red;
-  text-align: center;
 }
 
 code {

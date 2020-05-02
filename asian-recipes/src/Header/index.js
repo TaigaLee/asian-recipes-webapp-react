@@ -4,7 +4,7 @@ import "../index.css";
 export default function Header() {
   const headerStyle = {
     backgroundColor: "#cf383c",
-    height: "10em",
+    height: "8em",
     fontFamily: "Chewy",
     marginBottom: "2em",
     paddingLeft: "30px",
@@ -14,11 +14,11 @@ export default function Header() {
   const logoStyle = {
     fontFamily: "Bungee",
     color: "white",
-    fontSize: "4.6em"
+    fontSize: "3.5em"
   };
 
   const imgStyle = {
-    height: "100px",
+    height: "80px",
     verticalAlign: "middle"
   };
 
