@@ -19,13 +19,13 @@ export default function RecipeList(props) {
         <Button
           basic
           color="green"
-          size="medium"
+          style={{ width: "20%", height: "10%", marginTop: "30px" }}
           onClick={() => props.editRecipe(recipe.id)}
         >
           Edit {recipe.name}
         </Button>
         <Button
-          size="medium"
+          style={{ width: "20%", height: "10%", marginTop: "30px" }}
           basic
           color="red"
           onClick={() => props.deleteRecipe(recipe.id)}
@@ -37,7 +37,7 @@ export default function RecipeList(props) {
   });
 
   return (
-    <Item.Group divided centered={true}>
+    <Item.Group divided style={{ width: "50%", margin: "20px auto" }}>
       {recipes}
     </Item.Group>
   );

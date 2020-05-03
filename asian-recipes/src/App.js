@@ -10,7 +10,8 @@ export default class App extends React.Component {
     super();
 
     this.state = {
-      loggedIn: false
+      loggedIn: false,
+      loggedInUser: ""
     };
   }
 
@@ -50,9 +51,12 @@ export default class App extends React.Component {
         }
       });
 
+      const loginResponseJson = await loginResponse.json();
+
       if (loginResponse.status === 200) {
         this.setState({
-          loggedIn: true
+          loggedIn: true,
+          loggedInUser: loginResponseJson.data.username
         });
       }
     } catch (err) {
@@ -84,7 +88,7 @@ export default class App extends React.Component {
         {this.state.loggedIn ? (
           <div>
             <Header logout={this.logout} loggedIn={this.state.loggedIn} />
-            <RecipeContainer />
+            <RecipeContainer loggedInUser={this.state.loggedInUser} />
           </div>
         ) : (
           <LoginRegisterForm login={this.login} register={this.register} />
