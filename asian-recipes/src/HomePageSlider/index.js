@@ -19,7 +19,7 @@ export default class HomePageSlider extends React.Component {
         <Slider
           ref={slider => (this.slider = slider)}
           {...settings}
-          style={{ width: "50em", height: "10em", textAlign: "center" }}
+          style={{ width: "45em", height: "10em", textAlign: "center" }}
         >
           <div>
             <img

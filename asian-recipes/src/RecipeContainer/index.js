@@ -3,6 +3,7 @@ import RecipeList from "../RecipeList";
 import NewRecipeForm from "../NewRecipeForm";
 import EditRecipeModal from "../EditRecipeModal";
 import Header from "../Header";
+import "../index.css";
 
 export default class RecipeContainer extends React.Component {
   constructor(props) {
@@ -10,7 +11,9 @@ export default class RecipeContainer extends React.Component {
 
     this.state = {
       recipes: [],
-      idOfRecipeToEdit: -1
+      viewRecipes: false,
+      idOfRecipeToEdit: -1,
+      addingNewRecipe: false
     };
   }
 
@@ -129,17 +132,59 @@ export default class RecipeContainer extends React.Component {
     });
   };
 
+  viewRecipes = () => {
+    if (this.state.viewRecipes === false) {
+      this.setState({
+        viewRecipes: true
+      });
+    } else {
+      this.setState({
+        viewRecipes: false
+      });
+    }
+  };
+
+  changeStateWhenAddingRecipe = () => {
+    if (this.state.addingNewRecipe === false) {
+      this.setState({
+        addingNewRecipe: true
+      });
+    } else {
+      this.setState({
+        addingNewRecipe: false
+      });
+    }
+  };
+
   render() {
     return (
       <React.Fragment>
-        <Header />
-        <NewRecipeForm createRecipe={this.createRecipe} />
+        <div className="Span-Div">
+          <span className="RecipeContainer-Span" onClick={this.viewRecipes}>
+            All Recipes
+          </span>
+          <span className="RecipeContainer-Span">|</span>
+          <span
+            className="RecipeContainer-Span"
+            onClick={this.changeStateWhenAddingRecipe}
+          >
+            Add Recipe
+          </span>
+        </div>
 
-        <RecipeList
-          recipes={this.state.recipes}
-          deleteRecipe={this.deleteRecipe}
-          editRecipe={this.editRecipe}
-        />
+        {this.state.addingNewRecipe !== false && (
+          <NewRecipeForm
+            createRecipe={this.createRecipe}
+            changeStateWhenAddingRecipe={this.changeStateWhenAddingRecipe}
+          />
+        )}
+        {this.state.viewRecipes !== false && (
+          <RecipeList
+            recipes={this.state.recipes}
+            deleteRecipe={this.deleteRecipe}
+            editRecipe={this.editRecipe}
+          />
+        )}
 
         {this.state.idOfRecipeToEdit !== -1 && (
           <EditRecipeModal

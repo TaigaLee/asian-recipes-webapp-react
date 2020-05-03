@@ -4,6 +4,19 @@
   text-decoration: underline;
 }
 
+.RecipeContainer-Span {
+  cursor: pointer;
+  color: red;
+  font-size: 2em;
+  margin: 10px 5px;
+  font-family: "Chewy";
+}
+
+.Span-Div {
+  text-align: center;
+  margin-top: 1.5em;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

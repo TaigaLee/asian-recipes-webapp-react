@@ -2,6 +2,8 @@ import React from "react";
 import "./App.css";
 import RecipeContainer from "./RecipeContainer";
 import LoginRegisterForm from "./LoginRegisterForm";
+import Footer from "./Footer";
+import Header from "./Header";
 
 export default class App extends React.Component {
   constructor() {
@@ -58,14 +60,36 @@ export default class App extends React.Component {
     }
   };
 
+  logout = async () => {
+    try {
+      const url = process.env.REACT_APP_API_URL + "/api/v1/users/logout";
+
+      const logoutResponse = await fetch(url, {
+        credentials: "include"
+      });
+
+      if (logoutResponse.status === 200) {
+        this.setState({
+          loggedIn: false
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   render() {
     return (
       <div className="App">
         {this.state.loggedIn ? (
-          <RecipeContainer />
+          <div>
+            <Header logout={this.logout} loggedIn={this.state.loggedIn} />
+            <RecipeContainer />
+          </div>
         ) : (
           <LoginRegisterForm login={this.login} register={this.register} />
         )}
+        <Footer />
       </div>
     );
   }
