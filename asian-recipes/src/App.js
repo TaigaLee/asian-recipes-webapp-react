@@ -4,6 +4,7 @@ import RecipeContainer from "./RecipeContainer";
 import LoginRegisterForm from "./LoginRegisterForm";
 import Footer from "./Footer";
 import Header from "./Header";
+import UserSettings from "./UserSettings";
 
 export default class App extends React.Component {
   constructor() {
@@ -11,7 +12,8 @@ export default class App extends React.Component {
 
     this.state = {
       loggedIn: false,
-      loggedInUser: ""
+      loggedInUser: "",
+      viewingUserSettings: false
     };
   }
 
@@ -28,9 +30,12 @@ export default class App extends React.Component {
         }
       });
 
+      const registerResponseJson = await registerResponse.json();
+
       if (registerResponse.status === 201) {
         this.setState({
-          loggedIn: true
+          loggedIn: true,
+          loggedInUser: registerResponseJson.data
         });
       }
     } catch (err) {
@@ -56,7 +61,7 @@ export default class App extends React.Component {
       if (loginResponse.status === 200) {
         this.setState({
           loggedIn: true,
-          loggedInUser: loginResponseJson.data.username
+          loggedInUser: loginResponseJson.data
         });
       }
     } catch (err) {
@@ -82,12 +87,57 @@ export default class App extends React.Component {
     }
   };
 
+  viewingUserSettings = () => {
+    if (this.state.viewingUserSettings === false) {
+      this.setState({
+        viewingUserSettings: true
+      });
+    } else {
+      this.setState({
+        viewingUserSettings: false
+      });
+    }
+  };
+
+  deleteUser = async idOfUserToDelete => {
+    const url =
+      process.env.REACT_APP_API_URL + "/api/v1/users/" + idOfUserToDelete;
+
+    try {
+      const deleteUserResponse = await fetch(url, {
+        credentials: "include",
+        method: "DELETE"
+      });
+
+      const deleteUserJson = await deleteUserResponse.json();
+
+      if (deleteUserResponse.status === 200) {
+        this.setState({
+          currentUser: "",
+          loggedIn: false
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   render() {
     return (
       <div className="App">
         {this.state.loggedIn ? (
           <div>
-            <Header logout={this.logout} loggedIn={this.state.loggedIn} />
+            <Header
+              logout={this.logout}
+              loggedIn={this.state.loggedIn}
+              viewingUserSettings={this.viewingUserSettings}
+            />
+            {this.state.viewingUserSettings === true && (
+              <UserSettings
+                loggedInUser={this.state.loggedInUser}
+                deleteUser={this.deleteUser}
+              />
+            )}
             <RecipeContainer loggedInUser={this.state.loggedInUser} />
           </div>
         ) : (

@@ -49,7 +49,7 @@ export default function Header(props) {
               <span onClick={props.logout} style={spanStyle}>
                 Logout
               </span>
-              <span onClick={props.logout} style={spanStyle}>
+              <span onClick={props.viewingUserSettings} style={spanStyle}>
                 Settings
               </span>
             </React.Fragment>

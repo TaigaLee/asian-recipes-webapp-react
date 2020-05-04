@@ -179,12 +179,11 @@ export default class RecipeContainer extends React.Component {
   };
 
   render() {
-    console.log(this.state.usersRecipes);
     return (
       <React.Fragment>
         <div className="Span-Div">
           <span className="RecipeContainer-Span" onClick={this.viewRecipes}>
-            All Recipes
+            {this.state.viewRecipes ? "Your Recipes" : "All Recipes"}
           </span>
           <span className="RecipeContainer-Span">|</span>
           <span
