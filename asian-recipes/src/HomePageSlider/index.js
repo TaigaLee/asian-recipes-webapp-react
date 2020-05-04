@@ -25,18 +25,21 @@ export default class HomePageSlider extends React.Component {
             <img
               height="600rem"
               src="https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              alt="image1"
             />
           </div>
           <div>
             <img
               height="600rem"
               src="https://images.pexels.com/photos/698549/pexels-photo-698549.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              alt="image2"
             />
           </div>
           <div>
             <img
               height="600rem"
-              src="https://lh3.googleusercontent.com/proxy/X2YHSF5X56sIHunRUAk9akuipDrhFsULAw17xJA0z-H9CRjb0rsxBRhW-mH180zGUm0fpgiknsDnTdmdPIdF4iZUXfS0lKZy8dsHgPlARNptgfPpDCeBeD_a31J_LohXAVsghg"
+              src="https://topic.imgix.net/usq/c86c3945-5069-4eda-884f-af1997677303/c86c3945-5069-4eda-884f-af1997677303.jpeg?auto=compress,format&cs=srgb&dpr=1&w=1440&_=59901dd052ed888a567e041dc0ca8b50&bg=%23f0f0f0"
+              alt="image3"
             />
           </div>
         </Slider>

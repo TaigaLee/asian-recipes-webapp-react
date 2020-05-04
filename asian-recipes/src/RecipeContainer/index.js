@@ -4,6 +4,7 @@ import NewRecipeForm from "../NewRecipeForm";
 import EditRecipeModal from "../EditRecipeModal";
 import Header from "../Header";
 import "../index.css";
+import CurrentUserRecipeList from "../CurrentUserRecipeList";
 
 export default class RecipeContainer extends React.Component {
   constructor(props) {
@@ -13,12 +14,14 @@ export default class RecipeContainer extends React.Component {
       recipes: [],
       viewRecipes: false,
       idOfRecipeToEdit: -1,
-      addingNewRecipe: false
+      addingNewRecipe: false,
+      usersRecipes: []
     };
   }
 
   componentDidMount() {
     this.getRecipes();
+    this.getUsersRecipes();
   }
 
   getRecipes = async () => {
@@ -32,6 +35,25 @@ export default class RecipeContainer extends React.Component {
 
       this.setState({
         recipes: recipesJson.data
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  getUsersRecipes = async () => {
+    const url =
+      process.env.REACT_APP_API_URL + "/api/v1/recipes/" + "users_recipes";
+
+    try {
+      const recipesResponse = await fetch(url, {
+        credentials: "include"
+      });
+
+      const recipesJson = await recipesResponse.json();
+
+      this.setState({
+        usersRecipes: recipesJson.data
       });
     } catch (err) {
       console.error(err);
@@ -157,6 +179,7 @@ export default class RecipeContainer extends React.Component {
   };
 
   render() {
+    console.log(this.state.usersRecipes);
     return (
       <React.Fragment>
         <div className="Span-Div">
@@ -178,12 +201,14 @@ export default class RecipeContainer extends React.Component {
             changeStateWhenAddingRecipe={this.changeStateWhenAddingRecipe}
           />
         )}
-        {this.state.viewRecipes !== false && (
+        {this.state.viewRecipes ? (
           <RecipeList
             recipes={this.state.recipes}
             deleteRecipe={this.deleteRecipe}
             editRecipe={this.editRecipe}
           />
+        ) : (
+          <CurrentUserRecipeList recipes={this.state.usersRecipes} />
         )}
 
         {this.state.idOfRecipeToEdit !== -1 && (
