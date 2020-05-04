@@ -58,6 +58,8 @@ export default class App extends React.Component {
 
       const loginResponseJson = await loginResponse.json();
 
+      console.log(loginResponseJson);
+
       if (loginResponse.status === 200) {
         this.setState({
           loggedIn: true,
@@ -122,6 +124,34 @@ export default class App extends React.Component {
     }
   };
 
+  updateUser = async updatedUserInfo => {
+    const url =
+      process.env.REACT_APP_API_URL +
+      "/api/v1/users/" +
+      this.state.loggedInUser.id;
+
+    try {
+      const updateUserResponse = await fetch(url, {
+        credentials: "include",
+        method: "PUT",
+        body: JSON.stringify(updatedUserInfo),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      const updatedUserJson = await updateUserResponse.json();
+
+      if (updatedUserJson.status === 200) {
+        this.setState({
+          loggedInUser: updatedUserJson.data
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   render() {
     return (
       <div className="App">
@@ -136,6 +166,7 @@ export default class App extends React.Component {
               <UserSettings
                 loggedInUser={this.state.loggedInUser}
                 deleteUser={this.deleteUser}
+                updateUser={this.updateUser}
               />
             )}
             <RecipeContainer loggedInUser={this.state.loggedInUser} />
