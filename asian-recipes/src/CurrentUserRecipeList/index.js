@@ -7,16 +7,47 @@ export default function CurrentUserRecipeList(props) {
     return (
       <Item key={recipe.id}>
         <Item.Content>
-          <Item.Header>{recipe.name}</Item.Header>
+          <Item.Header
+            style={{
+              color: "red",
+              fontFamily: "Carter One",
+              fontSize: "2em"
+            }}
+          >
+            {recipe.name}
+          </Item.Header>
           <Item.Meta>
-            <div>Origin Country: {recipe.origin}</div>
-            <div>Posted by: You</div>
+            <div
+              style={{
+                marginBottom: "2px",
+                color: "#6e9a42",
+                fontFamily: "Chewy",
+                fontSize: "1em"
+              }}
+            >
+              Origin Country: {recipe.origin}
+            </div>
           </Item.Meta>
           <Item.Description>
-            <div>Ingredients: {recipe.ingredients}</div>
-            <div>Instructions: {recipe.instructions}</div>
+            <div
+              style={{
+                color: "red",
+                fontFamily: "Lilita One",
+                fontSize: "1.3em"
+              }}
+            >
+              Ingredients: {recipe.ingredients}
+            </div>
           </Item.Description>
         </Item.Content>
+        <Button
+          basic
+          color="black"
+          onClick={() => props.showRecipe(recipe.id)}
+          style={{ width: "15%", height: "10%", marginTop: "30px" }}
+        >
+          View
+        </Button>
         <Button
           basic
           color="green"
@@ -36,8 +67,6 @@ export default function CurrentUserRecipeList(props) {
       </Item>
     );
   });
-
-  console.log(props.recipes);
 
   return (
     <React.Fragment>

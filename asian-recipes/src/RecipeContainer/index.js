@@ -5,6 +5,7 @@ import EditRecipeModal from "../EditRecipeModal";
 import Header from "../Header";
 import "../index.css";
 import CurrentUserRecipeList from "../CurrentUserRecipeList";
+import RecipeShowPage from "../RecipeShowPage";
 
 export default class RecipeContainer extends React.Component {
   constructor(props) {
@@ -15,7 +16,8 @@ export default class RecipeContainer extends React.Component {
       viewRecipes: false,
       idOfRecipeToEdit: -1,
       addingNewRecipe: false,
-      usersRecipes: []
+      usersRecipes: [],
+      recipeToShow: null
     };
   }
 
@@ -120,6 +122,25 @@ export default class RecipeContainer extends React.Component {
     });
   };
 
+  showRecipe = async idOfRecipeToView => {
+    try {
+      const url =
+        process.env.REACT_APP_API_URL + "/api/v1/recipes/" + idOfRecipeToView;
+
+      const recipeResponse = await fetch(url, {
+        credentials: "include"
+      });
+
+      const recipeJson = await recipeResponse.json();
+
+      this.setState({
+        recipeToShow: recipeJson.data
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   updateRecipe = async updatedRecipeInfo => {
     try {
       const url =
@@ -195,9 +216,21 @@ export default class RecipeContainer extends React.Component {
     }
   };
 
+  hideRecipe = () => {
+    this.setState({
+      recipeToShow: null
+    });
+  };
+
   render() {
     return (
       <React.Fragment>
+        {this.state.recipeToShow !== null && (
+          <RecipeShowPage
+            recipeToShow={this.state.recipeToShow}
+            hideRecipe={this.hideRecipe}
+          />
+        )}
         <div className="Span-Div">
           <span className="RecipeContainer-Span" onClick={this.viewRecipes}>
             {this.state.viewRecipes ? "Your Recipes" : "All Recipes"}
@@ -218,12 +251,16 @@ export default class RecipeContainer extends React.Component {
           />
         )}
         {this.state.viewRecipes ? (
-          <RecipeList recipes={this.state.recipes} />
+          <RecipeList
+            recipes={this.state.recipes}
+            showRecipe={this.showRecipe}
+          />
         ) : (
           <CurrentUserRecipeList
             recipes={this.state.usersRecipes}
             deleteRecipe={this.deleteRecipe}
             editRecipe={this.editRecipe}
+            showRecipe={this.showRecipe}
           />
         )}
 
