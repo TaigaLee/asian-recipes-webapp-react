@@ -74,6 +74,9 @@ export default class RecipeContainer extends React.Component {
         this.setState({
           recipes: this.state.recipes.filter(
             recipe => recipe.id !== idOfRecipeToDelete
+          ),
+          usersRecipes: this.state.usersRecipes.filter(
+            recipe => recipe.id !== idOfRecipeToDelete
           )
         });
       }
@@ -96,9 +99,14 @@ export default class RecipeContainer extends React.Component {
       });
       const createdRecipeJson = await createdRecipeResponse.json();
 
+      let usersRecipes = this.state.usersRecipes;
+
+      usersRecipes.push(createdRecipeJson.data);
+
       if (createdRecipeResponse.status === 201) {
         this.setState({
-          recipes: [...this.state.recipes, createdRecipeJson.data]
+          recipes: [...this.state.recipes, createdRecipeJson.data],
+          usersRecipes: usersRecipes
         });
       }
     } catch (err) {
@@ -136,11 +144,20 @@ export default class RecipeContainer extends React.Component {
           recipe => recipe.id === this.state.idOfRecipeToEdit
         );
 
+        const usersRecipes = this.state.usersRecipes;
+
+        const indexOfUserRecipeBeingUpdated = usersRecipes.findIndex(
+          recipe => recipe.id === this.state.idOfRecipeToEdit
+        );
+
         recipes[indexOfRecipeBeingUpdated] = updatedRecipeJson.data;
+
+        usersRecipes[indexOfUserRecipeBeingUpdated] = updatedRecipeJson.data;
 
         this.setState({
           recipes: recipes,
-          idOfRecipeToEdit: -1
+          idOfRecipeToEdit: -1,
+          usersRecipes: usersRecipes
         });
       }
     } catch (err) {
@@ -201,13 +218,13 @@ export default class RecipeContainer extends React.Component {
           />
         )}
         {this.state.viewRecipes ? (
-          <RecipeList
-            recipes={this.state.recipes}
+          <RecipeList recipes={this.state.recipes} />
+        ) : (
+          <CurrentUserRecipeList
+            recipes={this.state.usersRecipes}
             deleteRecipe={this.deleteRecipe}
             editRecipe={this.editRecipe}
           />
-        ) : (
-          <CurrentUserRecipeList recipes={this.state.usersRecipes} />
         )}
 
         {this.state.idOfRecipeToEdit !== -1 && (

@@ -37,6 +37,8 @@ export default function CurrentUserRecipeList(props) {
     );
   });
 
+  console.log(props.recipes);
+
   return (
     <React.Fragment>
       <h1 className="CurrentUserH1">Your Posted Recipes!</h1>
