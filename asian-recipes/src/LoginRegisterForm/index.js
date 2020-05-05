@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
 import Header from "../Header";
 import HomePageSlider from "../HomePageSlider";
-import RecipeList from "../RecipeList";
 
 export default class LoginRegisterForm extends React.Component {
   constructor() {

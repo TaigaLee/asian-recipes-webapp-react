@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, Label, Segment, Modal, Header } from "semantic-ui-react";
+import { Form, Button, Label, Modal, Header } from "semantic-ui-react";
 
 export default class UserSettings extends React.Component {
   constructor(props) {

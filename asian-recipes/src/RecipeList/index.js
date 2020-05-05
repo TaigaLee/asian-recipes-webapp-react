@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Icon, Image, Item, Label } from "semantic-ui-react";
+import { Button, Item } from "semantic-ui-react";
 
 export default function RecipeList(props) {
   const recipes = props.recipes.map(recipe => {

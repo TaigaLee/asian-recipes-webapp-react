@@ -2,7 +2,6 @@ import React from "react";
 import RecipeList from "../RecipeList";
 import NewRecipeForm from "../NewRecipeForm";
 import EditRecipeModal from "../EditRecipeModal";
-import Header from "../Header";
 import "../index.css";
 import CurrentUserRecipeList from "../CurrentUserRecipeList";
 import RecipeShowPage from "../RecipeShowPage";
@@ -44,8 +43,7 @@ export default class RecipeContainer extends React.Component {
   };
 
   getUsersRecipes = async () => {
-    const url =
-      process.env.REACT_APP_API_URL + "/api/v1/recipes/" + "users_recipes";
+    const url = process.env.REACT_APP_API_URL + "/api/v1/recipes/users_recipes";
 
     try {
       const recipesResponse = await fetch(url, {

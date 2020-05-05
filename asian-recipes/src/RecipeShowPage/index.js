@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Divider, Header, Button } from "semantic-ui-react";
+import { Container, Header, Button } from "semantic-ui-react";
 import "../index.css";
 
 export default class RecipeShowPage extends React.Component {
@@ -22,7 +22,11 @@ export default class RecipeShowPage extends React.Component {
           </Header>
           <p> Origin: {this.state.recipeToShow.origin} </p>
           <p> Poster: {this.state.recipeToShow.poster.username} </p>
-          <img src={this.state.recipeToShow.image} style={{ width: "300px" }} />
+          <img
+            src={this.state.recipeToShow.image}
+            style={{ width: "300px" }}
+            alt={this.state.recipeToShow.name}
+          />
           <h3> Ingredients: {this.state.recipeToShow.ingredients} </h3>
           <h4> Instructions: {this.state.recipeToShow.instructions} </h4>
           <Button

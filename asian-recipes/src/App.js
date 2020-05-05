@@ -111,8 +111,6 @@ export default class App extends React.Component {
         method: "DELETE"
       });
 
-      const deleteUserJson = await deleteUserResponse.json();
-
       if (deleteUserResponse.status === 200) {
         this.setState({
           currentUser: "",

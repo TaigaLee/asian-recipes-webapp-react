@@ -43,6 +43,7 @@ export default function Header(props) {
           <img
             style={imgStyle}
             src="http://icons.iconarchive.com/icons/thehoth/seo/256/seo-panda-icon.png"
+            alt="panda"
           />
           {props.loggedIn === true && (
             <React.Fragment>
