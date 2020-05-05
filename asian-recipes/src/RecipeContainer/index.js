@@ -112,7 +112,7 @@ export default class RecipeContainer extends React.Component {
         });
       }
     } catch (err) {
-      console.err(err);
+      console.error(err);
     }
   };
 

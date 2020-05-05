@@ -22,6 +22,7 @@ export default class RecipeShowPage extends React.Component {
           </Header>
           <p> Origin: {this.state.recipeToShow.origin} </p>
           <p> Poster: {this.state.recipeToShow.poster.username} </p>
+          <img src={this.state.recipeToShow.image} style={{ width: "300px" }} />
           <h3> Ingredients: {this.state.recipeToShow.ingredients} </h3>
           <h4> Instructions: {this.state.recipeToShow.instructions} </h4>
           <Button

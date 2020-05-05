@@ -16,7 +16,8 @@ export default class NewRecipeForm extends React.Component {
       name: "",
       origin: "",
       ingredients: "",
-      instructions: ""
+      instructions: "",
+      image: ""
     };
   }
 
@@ -26,10 +27,35 @@ export default class NewRecipeForm extends React.Component {
       name: this.state.name,
       origin: this.state.origin,
       ingredients: this.state.ingredients,
-      instructions: this.state.instructions
+      instructions: this.state.instructions,
+      image: this.state.image
     });
 
     this.props.changeStateWhenAddingRecipe();
+  };
+
+  uploadImage = async image => {
+    const files = image.target.files;
+    const data = new FormData();
+
+    data.append("file", files[0]);
+    data.append("upload_preset", "taigas");
+
+    const response = await fetch(
+      "https://api.cloudinary.com/v1_1/dxag2qkwk/image/upload",
+      {
+        method: "POST",
+        body: data
+      }
+    );
+
+    const file = await response.json();
+
+    console.log(file.secure_url);
+
+    this.setState({
+      image: file.secure_url
+    });
   };
 
   handleChange = event => {
@@ -68,12 +94,21 @@ export default class NewRecipeForm extends React.Component {
               />
 
               <Label color="red">Origin</Label>
+
               <Form.Input
                 type="text"
                 name="origin"
                 placeholder="Origin Country of Recipe"
                 value={this.state.origin}
                 onChange={this.handleChange}
+              />
+
+              <Label color="red"> Image </Label>
+              <Form.Input
+                type="file"
+                name="image"
+                placeholder="Upload image"
+                onChange={this.uploadImage}
               />
 
               <Label color="red">Ingredients</Label>

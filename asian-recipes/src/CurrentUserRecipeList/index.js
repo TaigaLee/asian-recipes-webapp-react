@@ -5,7 +5,7 @@ import "../index.css";
 export default function CurrentUserRecipeList(props) {
   const recipes = props.recipes.map(recipe => {
     return (
-      <Item key={recipe.id}>
+      <Item key={recipe.id} style={{ marginBottom: "10px" }}>
         <Item.Content>
           <Item.Header
             style={{
