@@ -5,7 +5,6 @@ o# asian-recipes-webapp-react
 1. Users will be able to register, log in, and delete user account.
 2. Users will be able to view others recipes and post their own.
 3. Users wil be able to CRUD their recipes (create, update, update, and delete)
-4. Users will be able to find recipes based off what country the food originates from, and maybe even search for recipes. (stretch goal)
 
 # Wireframes
 

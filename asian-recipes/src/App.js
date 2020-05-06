@@ -43,6 +43,7 @@ export default class App extends React.Component {
     }
   };
 
+  //
   login = async loginInfo => {
     try {
       const url = process.env.REACT_APP_API_URL + "/api/v1/users/login";
